@@ -60,23 +60,23 @@ Optionally, metaparameters to control the AROMS-Framework can be passed (see dem
 == Framework Results ==
 
 The main results of an optimization run are saved in a subfolder of a result directory. It consists - amongst others - of the following lists, plots and data:
-- <resultdir>/resultSummary.txt: Summary of results
+- [resultdir]/resultSummary.txt: Summary of results
 
-- <resultdir>/tables/sortedConfigurationList.csv: Configuration list sorted by cross-validation accuracy
-- <resultdir>/tables/compFreq_Classifiers_top50.csv: Frequency of classifiers under the best 50 configurations
-- <resultdir>/tables/compFreq_FeaturePreprocessing_top50.csv: Frequency of feature preprocessing methods under the best 50 configurations
-- <resultdir>/tables/compFreq_Features_top50.csv: Frequency of features under the best 50 configurations
-- <resultdir>/tables/compFreq_FeatureTransforms_top50.csv: Frequency of features transforms under the best 50 configurations
-- <resultdir>/tables/variableImportanceRandomForest.csv: Feature importance metric of random forest (used to improve the initial population)
+- [resultdir]/tables/sortedConfigurationList.csv: Configuration list sorted by cross-validation accuracy
+- [resultdir]/tables/compFreq_Classifiers_top50.csv: Frequency of classifiers under the best 50 configurations
+- [resultdir]/tables/compFreq_FeaturePreprocessing_top50.csv: Frequency of feature preprocessing methods under the best 50 configurations
+- [resultdir]/tables/compFreq_Features_top50.csv: Frequency of features under the best 50 configurations
+- [resultdir]/tables/compFreq_FeatureTransforms_top50.csv: Frequency of features transforms under the best 50 configurations
+- [resultdir]/tables/variableImportanceRandomForest.csv: Feature importance metric of random forest (used to improve the initial population)
 
-- <resultdir>/plots/evoDev_fitness_generation.pdf: Fitness development over the generations
-- <resultdir>/plots/evoDev_fitness_time.pdf: Fitness development over time
-- <resultdir>/plots/ConfigurationGraph.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are split into single feature channels.
-- <resultdir>/plots/ConfigurationGraph_unsplit.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are used directly.
+- [resultdir]/plots/evoDev_fitness_generation.pdf: Fitness development over the generations
+- [resultdir]/plots/evoDev_fitness_time.pdf: Fitness development over time
+- [resultdir]/plots/ConfigurationGraph.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are split into single feature channels.
+- [resultdir]/plots/ConfigurationGraph_unsplit.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are used directly.
 
-- <resultdir>/multipipeline/AccuarcyPlotSimpleTop.pdf: Results of multi-pipeline classifier depending on the number of pipelines (if a test datasets is provided)
+- [resultdir]/multipipeline/AccuarcyPlotSimpleTop.pdf: Results of multi-pipeline classifier depending on the number of pipelines (if a test datasets is provided)
 
-- <resultdir>/data/sortedConfigurationListTop.mat: Data of configurations
+- [resultdir]/data/sortedConfigurationListTop.mat: Data of configurations
 
 
 
