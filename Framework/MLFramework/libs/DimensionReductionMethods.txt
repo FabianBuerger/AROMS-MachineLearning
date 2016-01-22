@@ -1,0 +1,45 @@
+List of dimension Reduction methods
+in the Matlab Toolbox for Dimensionality Reduction
+
+
+Unsupervised
+-----------------------------
+no transform
+PCA
+KernelPCAGauss
+KernelPCAPoly
+AutoEncoder
+LLE
+HessianLLE
+Isomap
+ManifoldChart
+LaplacianEigenmaps
+LLTSA
+LTSA
+MVU
+DiffusionMaps
+SNE
+SymmetricSNE
+tSNE
+GPLVM
+LLC
+CFA
+ConformalEigenmaps
+SPE
+LPP
+NPE
+Sammon
+MDS
+FactorAnalysis
+
+
+
+Supervised methods
+----------------------------
+LDA
+KernelLDAGauss
+KernelLDAPoly
+MCML
+NCA
+LMNN
+

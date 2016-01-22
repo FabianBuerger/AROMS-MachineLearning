@@ -1,0 +1,57 @@
+% function preProcInfo = featureCalculatePreProcInfo(instanceFeatures, featurePreProcessingMethod)
+%
+% get preprocessing info for whiteing and scaling info for all feature sub channels with parameter
+%
+% featurePreProcessingMethod: 'scaling_zero_one'  ->  feature scaling to range 0-1
+% featurePreProcessingMethod: 'scaling_statistically' -> feature scaling to average = 0 and std = 1
+%
+% -------
+% Author: Fabian Buerger, Intelligent Systems Group,
+% University of Duisburg-Essen, Germany
+% http://www.is.uni-due.de/
+% 2013-2015    
+
+function preProcData = featureCalculatePreProcInfo(instanceFeatures, featurePreProcessingMethod)
+    preProcData = struct;
+    featureFields = fieldnames(instanceFeatures);       
+    if strcmp(featurePreProcessingMethod,'scaling_zero_one')
+        % scaling all values to range 0 - 1: get min and delta values
+        for iFeat = 1:numel(featureFields)
+            cFeat = featureFields{iFeat};
+            featureMatrix = instanceFeatures.(cFeat);
+            featureMins = min(featureMatrix,[],1);
+            featureMaxs = max(featureMatrix,[],1);
+            featureDeltas = featureMaxs-featureMins;
+            featureDeltas(featureDeltas<eps) = 1;
+            preProcData = setfield(preProcData,[cFeat '_mins'],featureMins);
+            preProcData = setfield(preProcData,[cFeat '_deltas'],featureDeltas);
+        end        
+    elseif strcmp(featurePreProcessingMethod,'scaling_statistically')
+        % scaling to zero mean and std of 1: get means and std values
+        for iFeat = 1:numel(featureFields)
+            cFeat = featureFields{iFeat};
+            featureMatrix = instanceFeatures.(cFeat);
+            featureMeans = mean(featureMatrix,1);
+            featureStds = std(featureMatrix,1);
+            featureStds(abs(featureStds) <= eps) = 1;
+            preProcData = setfield(preProcData,[cFeat '_means'],featureMeans);
+            preProcData = setfield(preProcData,[cFeat '_stds'],featureStds);
+        end        
+    elseif strcmp(featurePreProcessingMethod,'whitening')
+        % feature whithening (from dimension reduction toolbox)
+        featureMatrix = featureMatrixFromFeatureStruct(instanceFeatures);
+        mu_X = mean(featureMatrix, 1);
+        featureMatrix = bsxfun(@minus, featureMatrix, mu_X);
+        mappedfeatureMatrix = featureMatrix / sqrtm(cov(featureMatrix));
+        W = featureMatrix \ mappedfeatureMatrix;   
+        preProcData.mean = mu_X;
+        preProcData.W = W;
+    else
+        % no scaling at all
+    end
+
+end
+
+
+    
+ 
