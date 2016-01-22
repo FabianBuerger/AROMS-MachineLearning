@@ -9,6 +9,7 @@ One way to contact me is the following: mail.fabian <at> gmx [.] de
 
 
 == Application Field and Approach ==
+
 The application field of the AROMS-Framework is the optimization of a data processing pipeline for the supervised classification problem. The pipeline is highly adaptable to every learning task and consists of four elements that process the data consecutively:
 1) The feature selection element selects a useful feature subset
 2) The feature preprocessing element applies data preprocessing methods such as rescaling, L2-normalization or prewhitening
@@ -20,6 +21,7 @@ An Evolutionary Algorithm called Evolutionary Configuration Adaptation (ECA) is 
 
 
 == System Requirements ==
+
 The system was developed and tested for Matlab 2014b and Ubuntu Linux 14.04, however, tests on newer versions of Matlab and also under Windows were successful. Depending on the dataset size, > 8GB of RAM are useful.
 
 The following Matlab toolboxes are required / very useful:
@@ -30,11 +32,13 @@ The following Matlab toolboxes are required / very useful:
 
 
 == Framework Demo Scripts ==
+
 Demo scripts to run the optimization and to use the resulting classification pipelines can be found in /Framework/MLFrameworkDemo/
 
 
 
 == Framework Input Data ==
+
 The framework solely requires a dataset structure with the training dataset, which contains the following data:
 dataSet = struct:
   - dataSetName: string with a name, e.g., 'coinsClassification'
@@ -48,6 +52,7 @@ Optionally, metaparameters to control the AROMS-Framework can be passed (see dem
 
 
 == Framework Results ==
+
 The main results of an optimization run are saved in a subfolder of a result directory. It consists - amongst others - of the following lists, plots and data:
 - <resultdir>/resultSummary.txt: Summary of results
 
@@ -70,6 +75,7 @@ The main results of an optimization run are saved in a subfolder of a result dir
 
 
 == Citation of the Framework ==
+
 If you find the AROMS-Framework somehow useful and you like to cite it, please use the following data:
 
 @incollection{buerger2015,
@@ -103,6 +109,7 @@ My PhD thesis about the AROMS-Framework is going to be submitted and published s
 
 
 == Software license  ==
+
 *My* code can be freely used for research and commercial purpose unless you leave my name inside of the comments. However, some files contain (partly slightly modified) versions of:
 
 - Matlab Toolbox for Dimensionality Reduction, provided by Laurens van der Maaten, https://lvdmaaten.github.io/drtoolbox/
