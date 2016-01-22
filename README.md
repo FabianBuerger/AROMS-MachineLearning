@@ -4,7 +4,9 @@ Automatic Representation Optimization and Model Selection Framework for Machine 
 This is the publication of the Matlab source code of the AROMS-Framework. It is the main contribution of my PhD project at the Intelligent Systems Group (Intelligente Systeme) of the University of Duisburg-Essen in Germany. 
 
 Dipl.-Inf. Fabian Bürger, 22.01.2016
+
 One way to contact me is the following: mail.fabian <at> gmx [.] de
+
 
 
 
@@ -20,6 +22,7 @@ An Evolutionary Algorithm called Evolutionary Configuration Adaptation (ECA) is 
 
 
 
+
 == System Requirements ==
 
 The system was developed and tested for Matlab 2014b and Ubuntu Linux 14.04, however, tests on newer versions of Matlab and also under Windows were successful. Depending on the dataset size, > 8GB of RAM are useful.
@@ -31,9 +34,11 @@ The following Matlab toolboxes are required / very useful:
 
 
 
+
 == Framework Demo Scripts ==
 
 Demo scripts to run the optimization and to use the resulting classification pipelines can be found in /Framework/MLFrameworkDemo/
+
 
 
 
@@ -48,6 +53,7 @@ dataSet = struct:
 
 See /Framework/MLFrameworkDemo/Datasets/ for exemplary datasets
 Optionally, metaparameters to control the AROMS-Framework can be passed (see demo scripts) in classification jobs.
+
 
 
 
@@ -74,6 +80,7 @@ The main results of an optimization run are saved in a subfolder of a result dir
 
 
 
+
 == Citation of the Framework ==
 
 If you find the AROMS-Framework somehow useful and you like to cite it, please use the following data:
@@ -92,6 +99,7 @@ pages={52-68}
 
 
 
+
 == Relevant Peer-Reviewed Publications ==
 
 - [Bürger et al., 2014] Bürger, F., Buck, C., Pauli, J., and Luther, W. (2014). Image-based Object Classification of Defects in Steel using Data-driven Machine Learning Optimization. In Braz, J. and Battiato, S., editors, Proceedings of VISAPP 2014 - International Conference on Computer Vision Theory and Applications, volume 2, pages 143–152. SCITEPRESS, Lisbon, Portugal.
@@ -105,6 +113,7 @@ pages={52-68}
 - [Bürger and Pauli, 2016] Bürger, F. and Pauli, J. (2016). Understanding the Interplay of Simultaneous Model Selection and Representation Optimization for Classification Tasks. International Conference on Pattern Recognition Applications and Methods ICPRAM 2016, Rome, Italy, 24.-26.02.2016, accepted.
 
 My PhD thesis about the AROMS-Framework is going to be submitted and published soon. 
+
 
 
 
