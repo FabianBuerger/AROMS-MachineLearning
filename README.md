@@ -13,10 +13,15 @@ One way to contact me is the following: mail.fabian <at> gmx [.] de
 == Application Field and Approach ==
 
 The application field of the AROMS-Framework is the optimization of a data processing pipeline for the supervised classification problem. The pipeline is highly adaptable to every learning task and consists of four elements that process the data consecutively:
+
 1) The feature selection element selects a useful feature subset
+
 2) The feature preprocessing element applies data preprocessing methods such as rescaling, L2-normalization or prewhitening
+
 3) The feature transform element applies a suitable feature transform from the field of manifold learning and representation learning such as Principal Component Analysis (PCA), Autoencoder or LLE (Locally Linear Embedding) 
+
 4) The classifier element contains the classifier and offers several alternatives such as kernel Support Vector Machines (SVM), random forests or artificial neural networks.
+
 
 An Evolutionary Algorithm called Evolutionary Configuration Adaptation (ECA) is used to optimize the pipeline configuration to a given training dataset. The ECA algorithm selects the feature subset, the preprocessing algorithm, the feature transform, the classifier and all hyperparameters based on cross-validation. Furthermore, the optimization trajectory is exploited to obtain a graph visualization of the best configurations (multi-configuration graph) and to improve the classification performance using a multi-pipeline classifier.
 
