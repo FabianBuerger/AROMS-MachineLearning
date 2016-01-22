@@ -1,9 +1,12 @@
 # AROMS-MachineLearning
 
 Automatic Representation Optimization and Model Selection Framework for Machine Learning - AROMS-Framework
+
 This is the publication of the Matlab source code of the AROMS-Framework. It is the main contribution of my PhD project at the Intelligent Systems Group (Intelligente Systeme) of the University of Duisburg-Essen in Germany. 
 
+
 Dipl.-Inf. Fabian Bürger, 22.01.2016
+
 
 One way to contact me is the following: mail.fabian <at> gmx [.] de
 
