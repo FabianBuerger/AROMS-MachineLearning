@@ -7,6 +7,7 @@ Dipl.-Inf. Fabian Bürger, 22.01.2016
 One way to contact me is the following: mail.fabian <at> gmx [.] de
 
 
+
 == Application Field and Approach ==
 The application field of the AROMS-Framework is the optimization of a data processing pipeline for the supervised classification problem. The pipeline is highly adaptable to every learning task and consists of four elements that process the data consecutively:
 1) The feature selection element selects a useful feature subset
@@ -15,6 +16,7 @@ The application field of the AROMS-Framework is the optimization of a data proce
 4) The classifier element contains the classifier and offers several alternatives such as kernel Support Vector Machines (SVM), random forests or artificial neural networks.
 
 An Evolutionary Algorithm called Evolutionary Configuration Adaptation (ECA) is used to optimize the pipeline configuration to a given training dataset. The ECA algorithm selects the feature subset, the preprocessing algorithm, the feature transform, the classifier and all hyperparameters based on cross-validation. Furthermore, the optimization trajectory is exploited to obtain a graph visualization of the best configurations (multi-configuration graph) and to improve the classification performance using a multi-pipeline classifier.
+
 
 
 == System Requirements ==
@@ -26,8 +28,10 @@ The following Matlab toolboxes are required / very useful:
 - Statistics and Machine Learning Toolbox for random forest (optional)
 
 
+
 == Framework Demo Scripts ==
 Demo scripts to run the optimization and to use the resulting classification pipelines can be found in /Framework/MLFrameworkDemo/
+
 
 
 == Framework Input Data ==
@@ -42,25 +46,27 @@ See /Framework/MLFrameworkDemo/Datasets/ for exemplary datasets
 Optionally, metaparameters to control the AROMS-Framework can be passed (see demo scripts) in classification jobs.
 
 
+
 == Framework Results ==
 The main results of an optimization run are saved in a subfolder of a result directory. It consists - amongst others - of the following lists, plots and data:
-<resultdir>/resultSummary.txt: Summary of results
+- <resultdir>/resultSummary.txt: Summary of results
 
-<resultdir>/tables/sortedConfigurationList.csv: Configuration list sorted by cross-validation accuracy
-<resultdir>/tables/compFreq_Classifiers_top50.csv: Frequency of classifiers under the best 50 configurations
-<resultdir>/tables/compFreq_FeaturePreprocessing_top50.csv: Frequency of feature preprocessing methods under the best 50 configurations
-<resultdir>/tables/compFreq_Features_top50.csv: Frequency of features under the best 50 configurations
-<resultdir>/tables/compFreq_FeatureTransforms_top50.csv: Frequency of features transforms under the best 50 configurations
-<resultdir>/tables/variableImportanceRandomForest.csv: Feature importance metric of random forest (used to improve the initial population)
+- <resultdir>/tables/sortedConfigurationList.csv: Configuration list sorted by cross-validation accuracy
+- <resultdir>/tables/compFreq_Classifiers_top50.csv: Frequency of classifiers under the best 50 configurations
+- <resultdir>/tables/compFreq_FeaturePreprocessing_top50.csv: Frequency of feature preprocessing methods under the best 50 configurations
+- <resultdir>/tables/compFreq_Features_top50.csv: Frequency of features under the best 50 configurations
+- <resultdir>/tables/compFreq_FeatureTransforms_top50.csv: Frequency of features transforms under the best 50 configurations
+- <resultdir>/tables/variableImportanceRandomForest.csv: Feature importance metric of random forest (used to improve the initial population)
 
-<resultdir>/plots/evoDev_fitness_generation.pdf: Fitness development over the generations
-<resultdir>/plots/evoDev_fitness_time.pdf: Fitness development over time
-<resultdir>/plots/ConfigurationGraph.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are split into single feature channels.
-<resultdir>/plots/ConfigurationGraph_unsplit.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are used directly.
+- <resultdir>/plots/evoDev_fitness_generation.pdf: Fitness development over the generations
+- <resultdir>/plots/evoDev_fitness_time.pdf: Fitness development over time
+- <resultdir>/plots/ConfigurationGraph.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are split into single feature channels.
+- <resultdir>/plots/ConfigurationGraph_unsplit.pdf: Multi-configuration graph to visualize the best 50 configurations: features, feature transforms and classifiers. The feature groups are used directly.
 
-<resultdir>/multipipeline/AccuarcyPlotSimpleTop.pdf: Results of multi-pipeline classifier depending on the number of pipelines (if a test datasets is provided)
+- <resultdir>/multipipeline/AccuarcyPlotSimpleTop.pdf: Results of multi-pipeline classifier depending on the number of pipelines (if a test datasets is provided)
 
-<resultdir>/data/sortedConfigurationListTop.mat: Data of configurations
+- <resultdir>/data/sortedConfigurationListTop.mat: Data of configurations
+
 
 
 == Citation of the Framework ==
@@ -79,23 +85,21 @@ pages={52-68}
 }
 
 
+
 == Relevant Peer-Reviewed Publications ==
 
-[Bürger et al., 2014] Bürger, F., Buck, C., Pauli, J., and Luther, W. (2014).
- Image-based Object Classification of Defects in Steel using Data-driven Machine Learning Optimization. In Braz, J. and Battiato, S., editors, Proceedings of VISAPP 2014 - International Conference on Computer Vision Theory and Applications, volume 2, pages 143–152. SCITEPRESS, Lisbon, Portugal.
+- [Bürger et al., 2014] Bürger, F., Buck, C., Pauli, J., and Luther, W. (2014). Image-based Object Classification of Defects in Steel using Data-driven Machine Learning Optimization. In Braz, J. and Battiato, S., editors, Proceedings of VISAPP 2014 - International Conference on Computer Vision Theory and Applications, volume 2, pages 143–152. SCITEPRESS, Lisbon, Portugal.
 
-[Bürger and Pauli, 2015a] Bürger, F. and Pauli, J. (2015)
-. Automatic Representation and Classifier Optimization for Image-based Object Recognition. In Battiato, S. and Imai, F., editors, Proceedings of the 10th International Conference on Computer Vision Theory and Applications (VISAPP 2015), volume 2, pages 542–550. SCITEPRESS, Lisbon, Portugal.
+- [Bürger and Pauli, 2015a] Bürger, F. and Pauli, J. (2015). Automatic Representation and Classifier Optimization for Image-based Object Recognition. In Battiato, S. and Imai, F., editors, Proceedings of the 10th International Conference on Computer Vision Theory and Applications (VISAPP 2015), volume 2, pages 542–550. SCITEPRESS, Lisbon, Portugal.
 
-[Bürger and Pauli, 2015b] Bürger, F. and Pauli, J. (2015). A Holistic Classification Optimization Framework with Feature Selection, Preprocessing, Manifold Learning and Classifiers. In Fred, A., Marsico, M. D., and Figueiredo, M., editors, Pattern Recognition: Applications and Methods - 4th International Conference, ICPRAM 2015, Lisbon, Portugal, January 10-12, 2015, Revised Selected Papers, volume 9493 of Lecture Notes in Computer Science, pages 52–68. Springer International Publishing.
+- [Bürger and Pauli, 2015b] Bürger, F. and Pauli, J. (2015). A Holistic Classification Optimization Framework with Feature Selection, Preprocessing, Manifold Learning and Classifiers. In Fred, A., Marsico, M. D., and Figueiredo, M., editors, Pattern Recognition: Applications and Methods - 4th International Conference, ICPRAM 2015, Lisbon, Portugal, January 10-12, 2015, Revised Selected Papers, volume 9493 of Lecture Notes in Computer Science, pages 52–68. Springer International Publishing.
 
-[Bürger and Pauli, 2015c] Bürger, F. and Pauli, J. (2015). Representation Optimization with Feature Selection and Manifold Learning in a
- Holistic Classification Framework. In De Marsico, M. and Fred, A., editors, ICPRAM 2015 - Proceedings of the International Conference on
- Pattern Recognition Applications and Methods, volume 1, pages 35–44. SCITEPRESS, Lisbon, Portugal.
+- [Bürger and Pauli, 2015c] Bürger, F. and Pauli, J. (2015). Representation Optimization with Feature Selection and Manifold Learning in a Holistic Classification Framework. In De Marsico, M. and Fred, A., editors, ICPRAM 2015 - Proceedings of the International Conference on Pattern Recognition Applications and Methods, volume 1, pages 35–44. SCITEPRESS, Lisbon, Portugal.
 
-[Bürger and Pauli, 2016] Bürger, F. and Pauli, J. (2016). Understanding the Interplay of Simultaneous Model Selection and Representation Optimization for Classification Tasks. International Conference on Pattern Recognition Applications and Methods ICPRAM 2016, Rome, Italy, 24.-26.02.2016, accepted.
+- [Bürger and Pauli, 2016] Bürger, F. and Pauli, J. (2016). Understanding the Interplay of Simultaneous Model Selection and Representation Optimization for Classification Tasks. International Conference on Pattern Recognition Applications and Methods ICPRAM 2016, Rome, Italy, 24.-26.02.2016, accepted.
 
 My PhD thesis about the AROMS-Framework is going to be submitted and published soon. 
+
 
 
 == Software license  ==
