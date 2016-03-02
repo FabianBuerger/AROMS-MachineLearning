@@ -56,7 +56,7 @@ The framework solely requires a dataset structure with the training dataset, whi
 dataSet = struct:
   - dataSetName: string with a name, e.g., 'coinsClassification'
   - classNames: cell array with string class names, e.g., {'coins10ct'  'coins1ct'  'coins20ct'  'coins2ct'  'coins5ct'}
-  - targetClasses: column vector with one class label per instance, [Nx1 double], e.g. [1; 1; 1; ... 2; 2; 2 ...], N = number of instances
+  - targetClasses: column vector with one class label per instance, [Nx1 double], e.g. [1; 1; 1; ... 2; 2; 2 ...], N = number of instances, must start with index 1 and end with the number of classes.
 - instanceFeatures: struct with feature data in groups (can be multidimensional), one field per feature group that contains a double matrix with a size of NxDi in which Di is the dimensionality of the ith feature group and N = number of instances. The lth row of every feature matrix represents the features of the lth instance and thus must match with the lth row of the targetClasses field.
 
 See /Framework/MLFrameworkDemo/Datasets/ for exemplary datasets
