@@ -43,12 +43,17 @@ classdef FeatureTransformAnalysis < handle
             this.getDataSetInfo(dataSet);
  
             for iTrans = 1:numel(options.transformations)
-                cTransform = options.transformations{iTrans};
-                options.transformationName = cTransform;
-                % calculate transform
-                transformedFeatures = this.calcTransformation(dataSet, options);
-                % plot transform
-                this.plotTransform(transformedFeatures, dataSet, options);
+                try
+                    cTransform = options.transformations{iTrans};
+                    fprintf('- Transform %d/%d %s \n',iTrans,numel(options.transformations), cTransform);
+                    options.transformationName = cTransform;
+                    % calculate transform
+                    transformedFeatures = this.calcTransformation(dataSet, options);
+                    % plot transform
+                    this.plotTransform(transformedFeatures, dataSet, options);
+                catch 
+                   fprintf(' transform FAILED\n') 
+                end
             end
             
         end       
@@ -93,22 +98,22 @@ classdef FeatureTransformAnalysis < handle
             pipelineConfig = ClassificationPipeline.getEmptyPipelineConfiguration(jobParams);
             
 %            pipelineConfig.configPreprocessing.featurePreProcessingMethod = 'scaling_zero_one';
-            pipelineConfig.configFeatureSelection.featureSubSet = fieldnames(dataSet.instanceFeatures); % use all for the moment
+            pipelineConfig.configFeatureSelection.featureSubSet = logical(ones(1,numel(fieldnames(dataSet.instanceFeatures)))); % use all for the moment
             pipelineConfig.configFeatureTransform.featureTransformMethod = transformationName;
             pipelineConfig.configFeatureTransform.featureTransformParams.nDimensions = nDim;
                         
-            % ==============> stage 1) Feature PreProcessing
+
+            % ==============> stage 1) Feature Subset selection
             data0 = struct;
             data0.dataSet = dataSet;
-            data0.config = pipelineConfig;
+            data0.config = pipelineConfig;            
+            featureSelectionElem = cPipeline.getPipelineElementByIndex(1); % get first element in pipeline
+            data1 = featureSelectionElem.prepareElement(data0);            
             
-            preProcessingElem = cPipeline.getPipelineElementByIndex(1); % get first element in pipeline
-            data1= preProcessingElem.prepareElement(data0);           
-            
-            % ==============> stage 2) Feature Subset selection
+            % ==============> stage 2) Feature PreProcessing
             data1.config = pipelineConfig;            
-            featureSelectionElem = cPipeline.getPipelineElementByIndex(2); % get second element in pipeline
-            data2 = featureSelectionElem.prepareElement(data1);
+            preProcessingElem = cPipeline.getPipelineElementByIndex(2); % get second element in pipeline
+            data2= preProcessingElem.prepareElement(data1);           
 
             % ==============> stage 3) Feature Transform
             data2.config = pipelineConfig;  
@@ -135,7 +140,7 @@ classdef FeatureTransformAnalysis < handle
             transformationName = options.transformationName;
             
             % check dimensionality
-            numberDimensions = max(1,min(3,numberDimensions));
+            numberDimensions = max(1,min(4,numberDimensions));
             numberDimensions = min(numberDimensions,size(transformedFeatures,2));
 
             displayMatrix = transformedFeatures(:,1:numberDimensions);
@@ -144,10 +149,12 @@ classdef FeatureTransformAnalysis < handle
             uniqueClasses = sort(uniqueClasses);
 
             h=figure();
+            set(gcf, 'renderer', 'painters');
             if ~options.showPlots
-                set(h,'Visible','off');
+               set(h,'Visible','off');
             end
-            set(h,'Position', [10 800 500 400]);
+           % set(h,'Position', [10 800 400 300]);
+            set(h,'Position', [10 800 800 600]);
              
             
             hold on;
@@ -159,28 +166,45 @@ classdef FeatureTransformAnalysis < handle
                 [plotSymbol, plotColor] = getClassPlotStyle(cClassInd);
 
                 if numberDimensions == 1
-                    plot(cData(:,1),0*cData(:,1),plotSymbol,'MarkerEdgeColor',plotColor,'MarkerSize',5);
+                    plot(cData(:,1),0*cData(:,1),plotSymbol,'MarkerEdgeColor',plotColor,'MarkerFaceColor',plotColor,'MarkerSize',5);
                 elseif numberDimensions == 2
-                    plot(cData(:,1),cData(:,2),plotSymbol,'MarkerEdgeColor',plotColor,'MarkerSize',5);
+                    plot(cData(:,1),cData(:,2),plotSymbol,'MarkerEdgeColor',plotColor,'MarkerFaceColor',plotColor,'MarkerSize',5);
+                elseif numberDimensions == 3
+                    plot3(cData(:,1),cData(:,2),cData(:,3),plotSymbol,'MarkerEdgeColor',plotColor,'MarkerFaceColor',plotColor,'MarkerSize',5);
                 else
-                    plot3(cData(:,1),cData(:,2),cData(:,3),plotSymbol,'MarkerEdgeColor',plotColor,'MarkerSize',5);
-                end  
+                    minDim = min(cData(:,4));
+                    maxDim = max(cData(:,4));
+                    
+                    color1 = 0.7*[40 122 193]/255;
+                    color2 = [205 231 255]/255;
+                    
+                    for jj=1:size(cData,1)
+                        valueShow = (cData(jj,4)-minDim)/(maxDim-minDim);
+                        hueVal = max(0,min(1,valueShow));
+                        plotcolor4ThsDim = hsv2rgb([hueVal 1 0.8]);
+                        %plotcolor4ThsDim = color1*(1-valueShow) + valueShow*color2;
+                        plot3(cData(jj,1),cData(jj,2),cData(jj,3),plotSymbol,'MarkerEdgeColor',plotcolor4ThsDim,'MarkerFaceColor',plotcolor4ThsDim,'MarkerSize',5);
+                    end
+                    
+                end
                 legendEntries{end+1} = classNames{cClassInd};
             end
+            if numberDimensions < 4
             legend(legendEntries);
-            if numberDimensions == 3
-                view([-20 45])
+            end
+            if numberDimensions >= 3
+                view([-45 19])
             end
             if numberDimensions >= 1
-                xlabel('d1');
+                xlabel('x_1');
             end 
             if numberDimensions >= 2
-                ylabel('d2');
+                ylabel('x_2');
             end            
             if numberDimensions >= 3
-                zlabel('d3');
+                zlabel('x_3');
             end                        
-            grid on;
+            grid minor;
 
                 
             titleString = sprintf('%s - %s',dataSet.dataSetName,transformationName);
@@ -194,7 +218,7 @@ classdef FeatureTransformAnalysis < handle
                 if strcmp(options.exportFormat,'png')
                     print(h,'-dpng','-r0',[exportName '.png']);    
                 end
-                if strcmp(options.exportFormat,'pdf')
+                if 1 || strcmp(options.exportFormat,'pdf')
                     print(h,'-dpdf','-r0',[exportName '.pdf']);    
                 end  
                 % export as figure (for later calling and changing size or such)
@@ -226,6 +250,54 @@ end
 
 % get unique plot style for class index
 function [plotSymbol, plotColor] = getClassPlotStyle(classIndex)
+   
+    color1 = [40 122 193]/255;
+    %color2 = [205 231 255]/255;
+   color2 = [189 44 0]/255;
+
+    switch classIndex
+        
+        case 1
+           plotColor = color1;    
+           plotSymbol = '^';
+        case 2
+           plotColor = color2;    
+           plotSymbol = '*';
+        case 3
+           plotColor = color1;    
+           plotSymbol = 'x';
+        case 4
+           plotColor = color2;    
+           plotSymbol = 'v';
+        case 5
+           plotColor = color1;    
+           plotSymbol = 'o';
+        case 6
+           plotColor = color2;    
+           plotSymbol = '<';
+        case 7
+           plotColor = color1;    
+           plotSymbol = '>';
+        case 8
+           plotColor = color2;    
+           plotSymbol = 'o';           
+        case 9
+           plotColor = color1;    
+           plotSymbol = '*';    
+        case 10
+           plotColor = color2;    
+           plotSymbol = '^';               
+        otherwise
+           plotColor = [1 0 0];    
+           plotSymbol = '*';
+           warning('class label exceeds number of symbols.')
+    end
+
+end
+
+
+% get unique plot style for class index
+function [plotSymbol, plotColor] = getClassPlotStyle_Gray(classIndex)
    
     color1 = [0 0 0];
     color2 = [0.65 0.65 0.65];

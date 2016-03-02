@@ -49,6 +49,41 @@ classdef DataSetPreparation < handle
                 skipDataSet = true;
                 return;
             end
+            % check target classes
+            if numel(dataSet.targetClasses)==0  
+                warning('Dataset problem: field targetClasses is empty.')
+                skipDataSet = true;
+                return;                    
+            end
+            % check target classes
+            if size(dataSet.targetClasses,2)~=1  
+                warning('Dataset problem: field targetClasses must be column vector.')
+                skipDataSet = true;
+                return;                    
+            end            
+            % check target classes
+            if ~isnumeric(dataSet.targetClasses) 
+                warning('Dataset problem: field targetClasses must be numeric.')
+                skipDataSet = true;
+                return;                    
+            end            
+            % check numeration of classes is correct
+            uniqueClasses = unique(dataSet.targetClasses(:));
+            if numel(uniqueClasses) < 2
+                warning('Dataset problem: field targetClasses contains less than 2 classes!')
+                skipDataSet = true;
+                return;                    
+            end                
+            if min(uniqueClasses) <= 0
+                warning('Dataset problem: field targetClasses class indices must start with 1.')
+                skipDataSet = true;
+                return;                    
+            end    
+            if max(uniqueClasses) ~= numel(uniqueClasses)
+                warning('Dataset problem: field targetClasses class indices must start with 1 and end with the number of classes. All inbetween indices must be used!')
+                skipDataSet = true;
+                return;                    
+            end               
             if ~isfield(dataSet,'instanceFeatures')
                 warning('Dataset problem: field instanceFeatures not available.')
                 skipDataSet = true;
@@ -78,7 +113,7 @@ classdef DataSetPreparation < handle
             dataSet.nSamples = size(dataSet.targetClasses,1);        
             dataSet.classIds = unique(dataSet.targetClasses);
             dataSet.nClasses = numel(dataSet.classIds);
-            
+            disp('Dataset ok');
             if dataSet.nFeatures <= 0
                 warning('Dataset problem: no features in dataSet.instanceFeatures provided.')
                 skipDataSet = true;
