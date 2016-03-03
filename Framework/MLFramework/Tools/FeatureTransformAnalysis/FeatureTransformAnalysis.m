@@ -211,16 +211,13 @@ classdef FeatureTransformAnalysis < handle
             hTitle=title(titleString);
             set(hTitle,'interpreter','none');
             
-            exportName = sprintf('%s%s_%s',options.exportPath ,dataSet.dataSetName, transformationName);
+            exportName = sprintf('%s%s_%s_%d_d',options.exportPath ,dataSet.dataSetName, transformationName,numberDimensions);
+            [~,~,~] = mkdir(options.exportPath);
             
             if options.exportPlot
                 set(h,'PaperPositionMode','auto');
-                if strcmp(options.exportFormat,'png')
-                    print(h,'-dpng','-r0',[exportName '.png']);    
-                end
-                if 1 || strcmp(options.exportFormat,'pdf')
-                    print(h,'-dpdf','-r0',[exportName '.pdf']);    
-                end  
+                print(h,'-dpng','-r0',[exportName '.png']);    
+                print(h,'-dpdf','-r0',[exportName '.pdf']);     
                 % export as figure (for later calling and changing size or such)
                 saveas(h,[exportName '.fig'],'fig')
             end            
