@@ -64,6 +64,9 @@ commonParams.crossValidationEarlyDiscarding = queryStruct(metaParamsIn,'crossVal
 % better than last one to go on with evaluation (fastest), 1.28=10%, 1.96=2,5% error
 % confidence interval
 commonParams.crossValidationEarlyDiscardingSignificance = queryStruct(metaParamsIn,'crossValidationEarlyDiscardingSignificance',0); 
+% instance dependency information
+commonParams.crossValidationInstanceDependencyInformation = queryStruct(metaParamsIn,'crossValidationInstanceDependencyInformation',[]); 
+
 % multi pipeline analysis / test data
 commonParams.multiPipelineTraining = queryStruct(metaParamsIn,'multiPipelineTraining',true);  % make multi classifier system
 commonParams.multiPipelineParameter = queryStruct(metaParamsIn,'multiPipelineParameter',struct); 

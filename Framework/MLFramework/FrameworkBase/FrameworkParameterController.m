@@ -124,10 +124,31 @@ classdef FrameworkParameterController < handle
            % include feature transform out of sample extension into cross
            % validation process (otherwise only classifier will be cross
            % validated) (holisticCVactive)
-           paramsOut.extendedCrossValidation = queryStruct(paramsIn,'extendedCrossValidation',1);            
+           paramsOut.extendedCrossValidation = queryStruct(paramsIn,'extendedCrossValidation',1);     
+           
+           % add additional information about instance dependencies: either
+           % empty or a vector with NT numbers pointing at the original,
+           % unique indicies
+           paramsOut.crossValidationInstanceDependencyInformation = queryStruct(paramsIn,'crossValidationInstanceDependencyInformation',[]);  
+           if ~isempty(paramsOut.crossValidationInstanceDependencyInformation) 
+                indexInfo = paramsOut.crossValidationInstanceDependencyInformation(:);
+                % check
+                if (numel(indexInfo) == numel(dataSetIn.targetClasses))
+                    paramsOut.crossValidationInstanceDependencyInformation = struct;
+                    paramsOut.crossValidationInstanceDependencyInformation.indexInfo = indexInfo;
+                    paramsOut.crossValidationInstanceDependencyInformation.indexInfoUnique = unique(indexInfo);
+                else
+                    warning('Dataset problem: Invalid crossValidationInstanceDependencyInformation: must contain as many indices as instances!');
+                    validConfig = 0;
+                    return;    
+                end
+               
+           end
+           
            
            % use new division sets (1) or use cached cross validation division (0)
-           paramsOut.crossValidationGenerateNewDivisions = queryStruct(paramsIn,'crossValidationGenerateNewDivisions',1);            
+           %paramsOut.crossValidationGenerateNewDivisions = queryStruct(paramsIn,'crossValidationGenerateNewDivisions',1);       
+           paramsOut.crossValidationGenerateNewDivisions = 1; % this always set
                       
            % stop cross validation round if the first rounds are already bad (earlyDiscarding)
            paramsOut.crossValidationEarlyDiscarding = queryStruct(paramsIn,'crossValidationEarlyDiscarding',1);  

@@ -451,7 +451,7 @@ classdef StrategyEvolutionary < OptimizationStrategy
             earlyDiscardingParams.timeLimitCriterionActive =  this.job.jobParams.crossValidationEarlyDiscardingTimeCriterion;
             earlyDiscardingParams.timeLimitSeconds = this.earlyDiscardingTimeLimitSecs;
             
-            dataStructBase.earlyDiscardingParams = earlyDiscardingParams;    
+            dataStructBase.earlyDiscardingParams = earlyDiscardingParams;      
             this.log(sprintf('Early discarding mean %0.5f with std %0.5f',earlyDiscardingParams.bestQualityMean, earlyDiscardingParams.bestQualityStd));
             
             % resultList
@@ -498,8 +498,14 @@ classdef StrategyEvolutionary < OptimizationStrategy
                             dataStruct = dataStructBase;
                             % new cross validation sets new generation 
                             if  dataStructBase.jobParams.crossValidationGenerateNewDivisions
-                                % randomize cross validation set each generation
-                                dataStruct.crossValidationSets = generateCrossValidationIndexSets(dataStructBase.dataSet.nSamples,dataStructBase.jobParams.crossValidationK);
+                                % randomize cross validation set each
+                                % generation using no dependency
+                                % information
+                                if ~isstruct(dataStructBase.jobParams.crossValidationInstanceDependencyInformation)
+                                    dataStruct.crossValidationSets = generateCrossValidationIndexSets(dataStructBase.dataSet.nSamples,dataStructBase.jobParams.crossValidationK);
+                                else
+                                    dataStruct.crossValidationSets = generateCrossValidationIndexSetsDependency(dataStructBase.dataSet.nSamples,dataStructBase.jobParams.crossValidationK,dataStructBase.jobParams.crossValidationInstanceDependencyInformation);
+                                end
                             end
 
                             dataStruct.classificationPipeline = ClassificationPipeline();

@@ -12,7 +12,7 @@ function demoFeatureTransformVisualization()
 
 
 % add path to framework
-addpath(genpath(['..' filesep '..' filesep 'MLFramework']));
+addpath(genpath([ '..' filesep 'MLFramework']));
 
 
 %__________________________________________________________________________
@@ -45,7 +45,7 @@ options.showPlots = 1;
 options.exportPlot = 1;
 
 % select transforms
-%options.transformations = getFeatureTransformGroups('*'); % all
+options.transformations = getFeatureTransformGroups('*'); % all
 options.transformations = {'PCA','Isomap','LLE','tSNE'}; % subset
 % options are:
 % options.transformations = 
