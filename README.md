@@ -2,14 +2,12 @@
 
 Automatic Representation Optimization and Model Selection Framework for Machine Learning - AROMS-Framework
 
-This is the publication of the Matlab source code of the AROMS-Framework. It is the main contribution of my PhD project at the Intelligent Systems Group (Intelligente Systeme) of the University of Duisburg-Essen in Germany. 
+This is the publication of the Matlab source code of the AROMS-Framework. It is the main contribution of my PhD project at the Intelligent Systems Group (Intelligente Systeme) of the University of Duisburg-Essen in Germany. My PhD thesis with the title "An Automatic Representation Optimization and Model Selection Framework for Machine Learning" is published online:
+http://nbn-resolving.org/urn:nbn:de:hbz:464-20160701-150742-8
 
+Dr.-Ing. Dipl.-Inf. Fabian Bürger, 4th of July, 2016
 
-Dipl.-Inf. Fabian Bürger, 22.01.2016
-
-
-One way to contact me is the following: mail.fabian <at> gmx [.] de
-
+One way to contact me is the following: fabuerger |at| gmail |dot| com
 
 
 
@@ -120,7 +118,8 @@ pages={52-68}
 
 - [Bürger and Pauli, 2016] Bürger, F. and Pauli, J. (2016). Understanding the Interplay of Simultaneous Model Selection and Representation Optimization for Classification Tasks. International Conference on Pattern Recognition Applications and Methods ICPRAM 2016, Rome, Italy, 24.-26.02.2016, accepted.
 
-My PhD thesis about the AROMS-Framework is going to be submitted and published soon. 
+- [Bürger, 2016] Bürger, F. (2016). An Automatic Representation Optimization and Model Selection Framework for Machine Learning. Dissertation/PhD thesis, Duisburg/Essen, published online: http://duepublico.uni-duisburg-essen.de/servlets/DocumentServlet?id=41550
+Direct permanent link: http://nbn-resolving.org/urn:nbn:de:hbz:464-20160701-150742-8
 
 
 
